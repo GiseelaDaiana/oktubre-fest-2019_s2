@@ -1,0 +1,29 @@
+import Cervezas.*
+import jarra.*
+import personas.*
+import Carpas.*
+import paises.*
+
+test "primeraParte" {
+	/*1 Contenido De Alcohol */
+	const hofbrau = new CervezaRoja(lupulo=12,paisDeOrigen="Belgica") 
+	graduacionMundial.graduacion(6.4)
+	const jarrahofbrau = new Jarra()
+	jarrahofbrau.cerveza(hofbrau)
+	jarrahofbrau.cantidadDeLitros(0.5)
+	
+	assert.equals(0.04, jarrahofbrau.cantidadDeAlcohol() )
+    /*2 Total de Alcohol */
+    
+    const pablo = new Personas(nivelDeAguante=10,peso=80,nacionalidad=belga,leGustaMusicaTradicional=true)
+ 
+    pablo.comprarJarra(jarrahofbrau)
+    pablo.comprarJarra(jarrahofbrau)
+    assert.equals(0.08 , pablo.cantidadDeAlcoholIngerido())
+    
+    /* 3 esta ebria */
+   assert.notThat(pablo.personaEbria())
+   
+   /*4 le gusta */
+   assert.that(pablo.meGustaCervezadeMarca(hofbrau))
+}

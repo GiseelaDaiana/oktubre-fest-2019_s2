@@ -1,0 +1,40 @@
+import personas.*
+import jarra.*
+import Carpas.*
+import Cervezas.*
+import paises.*
+
+test "parte2" {
+  
+  /*cerveza */
+  const hofbrau = new CervezaRoja(lupulo=12,paisDeOrigen="Belgica") 
+	graduacionMundial.graduacion(6.4)
+  /*jarra */
+  const jarraHofbrauMedio = new Jarra(cerveza=hofbrau,cantidadDeLitros=0.5)
+  const jarraHofbrauLitro = new Jarra(cerveza=hofbrau,cantidadDeLitros=1)
+  /*personas */
+  const pablo = new Personas(nivelDeAguante=10, peso = 80, nacionalidad= belga,leGustaMusicaTradicional=true,jarrasDeCervezaCompradas=[jarraHofbrauLitro,jarraHofbrauLitro])
+  const nicolas = new Personas(nivelDeAguante=100,peso=85,nacionalidad= aleman,leGustaMusicaTradicional=true,jarrasDeCervezaCompradas=[])
+  const julieta = new Personas(nivelDeAguante=30,peso=50,nacionalidad= checo,leGustaMusicaTradicional=false,jarrasDeCervezaCompradas=[jarraHofbrauMedio])
+  /*carpa */
+  const carpaHofbrau = new Carpa(limiteDeGente=15,tieneBandaDeMusica=true,jarrasDeCerveza=[jarraHofbrauMedio,jarraHofbrauLitro],marcaDeCerveza=hofbrau,personasEnCarpa= [julieta,julieta])
+ 
+   /*consulta */
+   assert.that(pablo.quiereEntrarEnCarpa(carpaHofbrau))
+   assert.notThat(carpaHofbrau.dejarEntrar(pablo))
+   assert.notThat(carpaHofbrau.puedeEntrar(pablo))
+   /*carpaHofbrau.entraEnCarpa(pablo) -->corta el test */
+   assert.that(pablo.quiereEntrarEnCarpa(carpaHofbrau))
+   assert.that(carpaHofbrau.dejarEntrar(nicolas))
+   assert.that(carpaHofbrau.puedeEntrar(nicolas))
+   assert.that(nicolas.quiereEntrarEnCarpa(carpaHofbrau))
+   carpaHofbrau.entraEnCarpa(nicolas)
+   carpaHofbrau.servirJarraDe_A_(1,nicolas)
+   assert.that(nicolas.ebrioEmpedernido())
+   assert.equals(1,carpaHofbrau.cantDeEbriosEmpedernidos())
+   assert.that(pablo.esPatriota())
+   
+   
+   
+   
+}
